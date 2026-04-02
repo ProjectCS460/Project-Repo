@@ -11,4 +11,4 @@ For COMPSCI 460 at University of Wisconsin Whitewater
 | Commit        | `git commit -m "message"`                  |
 | Push          | `git push origin <branch-name>`            |
 
-Requirements: Python 3.8, Code editor, (optional) VM enviroment.
+Requirements: $Python \le 3.10$, Code editor, (optional) VM enviroment.
