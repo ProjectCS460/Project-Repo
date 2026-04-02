@@ -5,7 +5,7 @@ Requirements: Python 3.8, Code editor, (optional) VM enviroment.
 
 | Action        | Command                                   |
 |---------------|--------------------------------------------|
-| Clone         | `git clone git@github.com:org/repo.git`    |
+| Clone         | `git clone https://github.com/ProjectCS460/Project-Repo`    |
 | Check Status  | `git status`                               |
 | Stage         | `git add <file>` or `git add .`            |
 | Commit        | `git commit -m "message"`                  |
