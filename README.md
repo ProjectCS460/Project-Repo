@@ -1,6 +1,6 @@
 # Project Repository
 For COMPSCI 460 at University of Wisconsin Whitewater
-Requirements: Python 3.8, Code editor, (optional) VM enviroment.
+
 ## Key Commands Summary
 
 | Action        | Command                                   |
@@ -10,3 +10,5 @@ Requirements: Python 3.8, Code editor, (optional) VM enviroment.
 | Stage         | `git add <file>` or `git add .`            |
 | Commit        | `git commit -m "message"`                  |
 | Push          | `git push origin <branch-name>`            |
+
+Requirements: Python 3.8, Code editor, (optional) VM enviroment.
