@@ -17,7 +17,7 @@ def serverMain():
 	#serverSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR,1)
 	serverSocket.bind(("", serverPort))
 	serverSocket.listen(1)
-	print("The number guess game server is ready!")
+	print("* | The server is ready!")
 	while True:
 		#Create connection socket when sensing new connection request
 		connectSocket,addr=serverSocket.accept()
