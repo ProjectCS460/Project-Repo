@@ -7,3 +7,19 @@ def TicketThread(connectSocket):
     print("* | Starting connection for service \n")
     clientRequest=connectSocket.recv(1024).decode()
 	print(clientRequest)
+	while(true) #input message for loop from clientRequest
+
+
+
+def serverMain():
+	serverPort = 12345 #create a welcome TCP socket
+	serverSocket= socket(AF_INET,SOCK_STREAM)
+	#serverSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR,1)
+	serverSocket.bind(("", serverPort))
+	serverSocket.listen(1)
+	print("The number guess game server is ready!")
+	while True:
+		#Create connection socket when sensing new connection request
+		connectSocket,addr=serverSocket.accept()
+		start_new_thread(numberGuessThread, (connectSocket,))
+serverMain()
