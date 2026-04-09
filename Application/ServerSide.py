@@ -1,3 +1,8 @@
+# Ticket App Server V1
+# VERSION 1: 	Handles input from ClientSide and ticketing
+# AUTHOR: 		JacobT2006
+# CREATED: 		04/9/2026
+
 #!/usr/sbin/python3
 from socket import *
 from _thread import *
