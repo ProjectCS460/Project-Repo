@@ -1,3 +1,4 @@
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ProjectCS460/Project-Repo)
 # Project Repository
 For COMPSCI 460 at University of Wisconsin Whitewater
 
