@@ -5,3 +5,5 @@ from random import *
 
 def TicketThread(connectSocket):
     print("* | Starting connection for service \n")
+    clientRequest=connectSocket.recv(1024).decode()
+	print(clientRequest)
