@@ -31,6 +31,7 @@ Client
 + Allow admin to search for ticket number
 + Log out and disconnect
 + Allow customers to check the status of their own ticket using ticket number/email
++ User based GUI for non admin
 
 Server
 + Contain ticket database.
