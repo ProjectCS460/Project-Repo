@@ -65,4 +65,4 @@ Server Response Format:
 ## Work Division:
 + Member A will work on the client side communication for admin.
 + Member B will work on the client side communication for user. 
-+ Member C will work on the server side communication between the client UI and the database with login validation.
++ JacobT2006 will work on the server side communication between the client UI and the database with login validation.
