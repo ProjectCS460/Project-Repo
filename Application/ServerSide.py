@@ -1,5 +1,5 @@
 # Ticket App Server V1
-# VERSION 1: 	Handles input from ClientSide and ticketing
+# VERSION 1: 	Handles input from ClientSide and ticket data as well as login validation
 # AUTHOR: 		JacobT2006
 # CREATED: 		04/9/2026
 
