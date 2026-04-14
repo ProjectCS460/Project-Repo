@@ -46,12 +46,16 @@ For our design of this project we will use the format: FOR_EXAMPLE | “Message 
 
 Customer Create Ticket:  
 + CREATE_TICKET | name | email | short_description \n
+
 Customer Check Status:  
 + CHECK_STATUS | ticket_id | email \n
+
 Admin Login:  
 + ADMIN_LOGIN | username | password \n
+
 Admin Update Ticket:  
 + UPDATE_STATUS | ticket_id | new_status | long_description \n
+
 Server Response Format:  
 + SUCCESS | message | optional_data \n  
 + ERROR | message \n
