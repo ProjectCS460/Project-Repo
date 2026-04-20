@@ -65,24 +65,122 @@ As a group we will develop a client-server based ticket application. For this pr
 + Verify customer identity when checking status.
 + Store updated ticket information after admin changes.
 
-## Protocol Design:
-For our design of this project we will use the format: FOR_EXAMPLE | “Message here”. This will be used in conjunction with \n to clearly label responses and messages to and from for any part of the project. As well as listed examples below
+Protocol Design (Unified Format)
+All messages in the system follow a standardized structure using the format COMMAND | field1 | field2 | … followed by a newline character. This ensures consistent communication between client and server. Server responses follow the format SUCCESS | message | optional_data or ERROR | message, depending on the outcome of the request.
 
-Customer Create Ticket:  
-+ CREATE_TICKET | name | email | short_description \n
+Client → Server Requests
+Basic User (Customer)
+Customers interact with the system using the following protocol messages:
 
-Customer Check Status:  
-+ CHECK_STATUS | ticket_id | email \n
+CREATE_TICKET | name | email | short_description  
+Used when a customer submits a new helpdesk ticket.
 
-Admin Login:  
-+ ADMIN_LOGIN | username | password \n
+CHECK_STATUS | ticket_id | email  
+Allows a customer to check the status of their own ticket.
 
-Admin Update Ticket:  
-+ UPDATE_STATUS | ticket_id | new_status | long_description \n
+VIEW_MY_TICKETS | email  
+Retrieves all tickets associated with the customer’s email.
 
-Server Response Format:  
-+ SUCCESS | message | optional_data \n  
-+ ERROR | message \n
+FILTER_MY_TICKETS | email | status  
+Filters the customer’s tickets by status (e.g., open or closed).
+
+DISCONNECT  
+Ends the client session after completing actions.
+
+Admin User
+Admins have elevated privileges and use the following protocol messages:
+
+ADMIN_LOGIN | username | password  
+Authenticates an admin user before granting access.
+
+VIEW_ALL_TICKETS  
+Retrieves the full ticket database.
+
+FILTER_TICKETS | status  
+Filters all tickets by status.
+
+SEARCH_TICKET | ticket_id  
+Searches for a specific ticket by its ID.
+
+UPDATE_TICKET | ticket_id | new_status | long_description  
+Allows admins to update ticket status and add detailed notes.
+
+CREATE_TICKET | name | email | short_description  
+Admins may also create tickets on behalf of users.
+
+VIEW_BY_NAME | customer_name  
+Retrieves tickets associated with a specific customer name.
+
+VIEW_BY_ID | ticket_id  
+Retrieves full details of a specific ticket.
+
+ADMIN_LOGOUT  
+Ends the admin session.
+
+Server → Client Responses
+The server responds to client requests using structured messages:
+
+SUCCESS | TICKET_CREATED | ticket_id  
+Confirms successful ticket creation.
+
+SUCCESS | STATUS | ticket_id | status | timestamp | long_description  
+Returns the full status of a ticket.
+
+SUCCESS | TICKET_LIST | ticket1_data ; ticket2_data ; …  
+Sends a list of tickets to the client.
+
+SUCCESS | FILTERED_LIST | ticket1_data ; ticket2_data ; …  
+Sends a filtered list of tickets.
+
+SUCCESS | ADMIN_AUTHENTICATED  
+Confirms successful admin login.
+
+SUCCESS | TICKET_UPDATED | ticket_id | new_status | long_description  
+Confirms that a ticket was successfully updated.
+
+SUCCESS | TICKET_FOUND | ticket_data  
+Returns the details of a searched ticket.
+
+ERROR | message  
+Indicates that an error occurred, such as invalid input or unauthorized access.
+
+Client‑Side Processing
+The client processes incoming server responses as follows:
+
+ &nbsp; When creating a ticket, the client sends a CREATE_TICKET message and waits for a SUCCESS response containing the new ticket ID, which is then displayed to the user.
+
+&nbsp; When checking ticket status, the client sends CHECK_STATUS and waits for a STATUS response containing the ticket’s details.
+
+&nbsp; When viewing or filtering tickets, the client receives a TICKET_LIST or FILTERED_LIST response and displays the results in a readable format.
+
+&nbsp; When logging in as an admin, the client sends ADMIN_LOGIN and waits for ADMIN_AUTHENTICATED before showing admin‑only options.
+
+&nbsp; When updating a ticket, the client receives TICKET_UPDATED and displays the updated information.
+
+&nbsp; When receiving an ERROR response, the client displays the error message and returns the user to the main menu.
+
+Server‑Side Processing
+ &nbsp; The server handles requests and manages the ticket database using the following logic:
+
+ &nbsp; On startup, the server loads the ticket database, initializes the ticket numbering system, and prepares admin authentication data.
+
+ &nbsp; When receiving CREATE_TICKET, the server parses the fields, assigns a new ticket ID, stores the ticket, and responds with TICKET_CREATED.
+
+ &nbsp; When receiving CHECK_STATUS, the server verifies that the email matches the ticket owner before returning ticket details or an error.
+
+ &nbsp; When receiving VIEW_MY_TICKETS, the server filters tickets by email and returns the list.
+
+ &nbsp; When receiving VIEW_ALL_TICKETS, the server returns the full ticket database to the admin.
+  
+ &nbsp; When receiving FILTER_TICKETS, the server filters tickets by status and returns the results.
+
+ &nbsp; When receiving SEARCH_TICKET, the server locates the ticket by ID and returns it or sends an error.
+
+ &nbsp; When receiving UPDATE_TICKET, the server validates admin privileges, updates the ticket’s status and long description, saves the changes, and returns TICKET_UPDATED.
+
+ &nbsp; When receiving ADMIN_LOGIN, the server validates credentials and returns either ADMIN_AUTHENTICATED or an error.
+
+ &nbsp; For any malformed or invalid request, the server responds with an ERROR message.
 
 
 ## Work Division:
