@@ -1,7 +1,12 @@
 # Ticket App Client V1
-# VERSION 1: 	Handles connection to ServerSide and client-side UI
+# VERSION 1: 	Handles connection to ServerSide and ready for client-side UI
+# AUTHOR: 		JacobT2006
+# CREATED: 		04/9/2026
+# VERSION 2: 	
 # AUTHOR: 		jzabawski3453 & MysticalSkeptic
 # CREATED: 		04/9/2026
+
+
 
 #!/usr/bin/python3
 from socket import *
