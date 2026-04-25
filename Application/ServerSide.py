@@ -3,6 +3,7 @@
 # AUTHOR: 		JacobT2006
 # CREATED: 		04/9/2026
 
+from pathlib import Path
 from socket import *
 from _thread import *
 from datetime import datetime
