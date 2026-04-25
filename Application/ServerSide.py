@@ -479,8 +479,8 @@ def main():
 if __name__ == "__main__":
     main()
 
-	connectSocket.close()
-    print(" * | Connection closed \n")
+connectSocket.close()
+print(" * | Connection closed \n")
 #------------------------------------------------------------
 # Connection socket
 
