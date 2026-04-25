@@ -18,12 +18,13 @@ next_ticket_id = 1001
 
 #------------------------------------------------------------
 # User identification
+users_data = Path(__file__).parent.parent / "Data" / "LOGIN.csv"
 
-def load_users(filename="LOGIN.csv"):
+def load_users():
     """Load admin credentials from LOGIN.csv"""
     global users
     try:
-        with open(filename, "r") as file:
+        with open(users_data, "r") as file:
             reader = csv.reader(file)
             next(reader, None)  # Skip header if present
             for row in reader:
@@ -58,11 +59,13 @@ def validate_basic_user(email):
 #------------------------------------------------------------
 # Load ticket database
 
-def load_data(filename="DATA.csv"):
+ticket_database = Path(__file__).parent.parent / "Data" / "DATA.csv"
+
+def load_data():
     """Load existing tickets from DATA.csv"""
     global tickets, next_ticket_id
     try:
-        with open(filename, "r") as file:
+        with open(ticket_database, "r") as file:
             reader = csv.reader(file)
             next(reader, None)  # Skip header if present
             for row in reader:
