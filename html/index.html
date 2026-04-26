@@ -9,15 +9,16 @@
     <body>
         <main>
             <section id="loginSection" >
-                <form id="loginForm" >
+                <form id="loginForm" method="post" >
                     <label for="userName">Enter your User Name</label><br>
                     <input type="text" id="userName" name="userName" required><br>
                     <label for="userPass">Enter your password</label><br>
-                    <input type="text" id="userPass" required>
+                    <input type="text" id="userPass" required><br>
+                    <button type="submit" name="loginSubmit">Log In</button>
                 </form>
             </section>
             <section id="newTicketSection" >
-                <form id="newTicketForm" >
+                <form id="newTicketForm" method="post" >
                     <label for="ticketTopic">What is the topic of your ticket?</label><br>
                     <input type="text" id="ticketTopic" required name="ticketTopic"><br>
                     <label for="ticketBody">Please describe the issue:</label><br>
