@@ -450,7 +450,7 @@ def TicketThread(connectSocket):
 
 def main():
     """Initialize server and handle connections"""
-    host = "127.0.0.1"
+    host = "127.0.0.1"                                     # Change to host IP if needed
     port = 13000
     
     # Load databases
@@ -482,24 +482,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-connectSocket.close()
-print(" * | Connection closed \n")
-#------------------------------------------------------------
-# Connection socket
-
-def serverMain():
-	serverPort = 12345 #create a welcome TCP socket
-	serverSocket= socket(AF_INET,SOCK_STREAM)
-	#serverSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR,1)
-	serverSocket.bind(("", serverPort))
-	serverSocket.listen(1)
-	print("* | The server is ready on port {serverPort}!")
-
-	# Loop to forever accept client requests
-	while True:
-		#Create connection socket when sensing new connection request
-		connectSocket,addr=serverSocket.accept()
-		start_new_thread(numberGuessThread, (connectSocket,))
-serverMain()
-#------------------------------------------------------------
