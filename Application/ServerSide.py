@@ -8,6 +8,7 @@ from socket import *
 from _thread import *
 from datetime import datetime
 import csv
+import sys
 import os
 
 #------------------------------------------------------------
@@ -19,7 +20,7 @@ next_ticket_id = 1001
 
 #------------------------------------------------------------
 # User identification
-users_data = Path(__file__).parent.parent / "Data" / "LOGIN.csv"
+users_data = Path(__file__).parent / "Data" / "LOGIN.csv"
 
 def load_users():
     """Load admin credentials from LOGIN.csv"""
@@ -38,8 +39,8 @@ def load_users():
                 }
         print("* User database loaded.")
     except FileNotFoundError:
-        print("* | ERROR: User CSV file not found.")
-        exit(1)
+        print(f"* | ERROR: User CSV file not found at: {users_data}")
+        sys.exit(1)
 
 #------------------------------------------------------------
 # Login validation
@@ -60,7 +61,7 @@ def validate_basic_user(email):
 #------------------------------------------------------------
 # Load ticket database
 
-ticket_database = Path(__file__).parent.parent / "Data" / "DATA.csv"
+ticket_database = Path(__file__).parent / "Data" / "DATA.csv"
 
 def load_data():
     """Load existing tickets from DATA.csv"""
@@ -86,13 +87,13 @@ def load_data():
                     next_ticket_id = ticket_id + 1
         print("* Ticket database loaded.")
     except FileNotFoundError:
-        print("* | ERROR: Data CSV file not found.")
-        exit(1)
+        print(f"* | WARNING: Data CSV not found at: {ticket_database}. Starting with empty ticket database.")
+        # Empty DB is valid — don't exit
 
-def save_data(filename="DATA.csv"):
+def save_data():
     """Save current tickets to DATA.csv"""
     try:
-        with open(filename, "w", newline="") as file:
+        with open(ticket_database, "w", newline="") as file:
             writer = csv.writer(file)
             writer.writerow(["ticket_id", "name", "email", "short_description", "status", "timestamp", "long_description"])
             for ticket_id, ticket in tickets.items():
@@ -114,7 +115,6 @@ def save_data(filename="DATA.csv"):
 
 def create_ticket(fields):
     """Create a new ticket"""
-    # fields = [name, email, short_description]
     global next_ticket_id
     
     if len(fields) < 3:
@@ -143,8 +143,6 @@ def create_ticket(fields):
 
 def check_ticket_status(fields):
     """Check status of a specific ticket by ID and email"""
-    # fields = [ticket_id, email]
-    
     if len(fields) < 2:
         return "ERROR | Invalid status check format\n"
     
@@ -167,8 +165,6 @@ def check_ticket_status(fields):
 
 def view_my_tickets(fields):
     """View all tickets for a specific customer email"""
-    # fields = [email]
-    
     if len(fields) < 1:
         return "ERROR | Invalid view request format\n"
     
@@ -187,8 +183,6 @@ def view_my_tickets(fields):
 
 def filter_my_tickets(fields):
     """Filter customer tickets by status"""
-    # fields = [email, status]
-    
     if len(fields) < 2:
         return "ERROR | Invalid filter format\n"
     
@@ -221,8 +215,6 @@ def admin_view_all():
 
 def admin_filter_tickets(fields):
     """Filter all tickets by status (admin only)"""
-    # fields = [status]
-    
     if len(fields) < 1:
         return "ERROR | Invalid filter format\n"
     
@@ -241,8 +233,6 @@ def admin_filter_tickets(fields):
 
 def admin_search_ticket(fields):
     """Search for specific ticket by ID (admin only)"""
-    # fields = [ticket_id]
-    
     if len(fields) < 1:
         return "ERROR | Invalid search format\n"
     
@@ -261,8 +251,6 @@ def admin_search_ticket(fields):
 
 def admin_update_ticket(fields):
     """Update ticket status and long description (admin only)"""
-    # fields = [ticket_id, new_status, long_description]
-    
     if len(fields) < 3:
         return "ERROR | Invalid update format\n"
     
@@ -288,8 +276,6 @@ def admin_update_ticket(fields):
 
 def admin_view_by_name(fields):
     """View tickets filtered by customer name (admin only)"""
-    # fields = [customer_name]
-    
     if len(fields) < 1:
         return "ERROR | Invalid view format\n"
     
@@ -308,8 +294,6 @@ def admin_view_by_name(fields):
 
 def admin_view_by_id(fields):
     """View full details of ticket by ID (admin only)"""
-    # fields = [ticket_id]
-    
     if len(fields) < 1:
         return "ERROR | Invalid view format\n"
     
@@ -450,8 +434,12 @@ def TicketThread(connectSocket):
 
 def main():
     """Initialize server and handle connections"""
-    host = "127.0.0.1"
+    host = "10.0.2.15"									#Replace with Computer IP
     port = 13000
+    
+    # Ensure Data directory exists
+    data_dir = Path(__file__).parent / "Data"
+    data_dir.mkdir(exist_ok=True)
     
     # Load databases
     load_users()
@@ -459,6 +447,7 @@ def main():
     
     # Create server socket
     serverSocket = socket(AF_INET, SOCK_STREAM)
+    serverSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
     serverSocket.bind((host, port))
     serverSocket.listen(5)
     
@@ -482,24 +471,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-connectSocket.close()
-print(" * | Connection closed \n")
-#------------------------------------------------------------
-# Connection socket
-
-def serverMain():
-	serverPort = 12345 #create a welcome TCP socket
-	serverSocket= socket(AF_INET,SOCK_STREAM)
-	#serverSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR,1)
-	serverSocket.bind(("", serverPort))
-	serverSocket.listen(1)
-	print("* | The server is ready on port {serverPort}!")
-
-	# Loop to forever accept client requests
-	while True:
-		#Create connection socket when sensing new connection request
-		connectSocket,addr=serverSocket.accept()
-		start_new_thread(numberGuessThread, (connectSocket,))
-serverMain()
-#------------------------------------------------------------
