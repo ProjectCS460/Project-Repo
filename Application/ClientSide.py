@@ -2,11 +2,6 @@
 # VERSION 1: 	Handles connection to ServerSide and ready for client-side UI
 # AUTHOR: 		JacobT2006
 # CREATED: 		04/9/2026
-# VERSION 2: 	
-# AUTHOR: 		jzabawski3453 & MysticalSkeptic
-# CREATED: 		04/9/2026
-
-
 
 #!/usr/bin/python3
 from socket import *
@@ -14,10 +9,9 @@ import sys
 
 #------------------------------------------------------------
 # Server connection
-
 serverSocket = None
 
-def connect_to_server(host="127.0.0.1", port=13000):
+def connect_to_server(host="10.0.2.15", port=13000):        #Change host to computer!!!!!!!!!!!!!
     """Establish connection to ticket server"""
     global serverSocket
     
@@ -30,7 +24,7 @@ def connect_to_server(host="127.0.0.1", port=13000):
         print("* | ERROR: Could not connect to server - connection refused\n")
         print("* | Ensure server is running on {}:{}\n".format(host, port))
         return False
-    except socket.timeout:
+    except timeout:                         # FIX: was socket.timeout (invalid after `from socket import *`)
         print("* | ERROR: Connection to server timed out\n")
         return False
     except Exception as e:
@@ -79,6 +73,8 @@ def disconnect_from_server():
     
     if serverSocket is not None:
         try:
+            send_request("DISCONNECT")
+            receive_response()
             serverSocket.close()
             serverSocket = None
             print("* | Disconnected from server\n")
@@ -108,7 +104,5 @@ def main():
         disconnect_from_server()
 
 #------------------------------------------------------------
-
 if __name__ == "__main__":
     main()
-
