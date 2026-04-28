@@ -16,7 +16,7 @@ import sys
 # Server connection
 
 serverSocket = None
-host = "127.0.0.1"                                   # Change to server IP if needed
+host = "10.0.2.15"                                   # Change to server IP if needed
 admin_authenticated = False
 
 def connect_to_server(host, port=13000):

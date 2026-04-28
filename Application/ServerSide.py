@@ -450,7 +450,7 @@ def TicketThread(connectSocket):
 
 def main():
     """Initialize server and handle connections"""
-    host = "127.0.0.1"                                     # Change to host IP if needed
+    host = "10.0.2.15"                                     # Change to host IP if needed
     port = 13000
     
     # Load databases
