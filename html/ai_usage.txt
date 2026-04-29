@@ -1,0 +1,8 @@
+Chris -
+We're supposed to document our use of AI, right?
+I used Claude AI to generate the html, js and css template for the front end.
+My personal skills would not produce this code fast enough for the project deadline, though I know I could do it with enough time.
+Never connected python and js before so haveing AI do that was nice.
+It will all require some customization to our specific app, like the admin display capabilities and specifics of the form.
+I might also need to go in and fix some text placement, at first glance I'm pretty sure a couple things are out of place.
+The only way I can think to test the system is to make a ticket and submit through the full pipeline, and we don't need AI for that.
