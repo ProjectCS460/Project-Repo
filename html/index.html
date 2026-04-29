@@ -1,33 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Tickets</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="styleSheets" href="styleSheets/index.css">
-        <script src="js/index.js" charset="utf-8"></script>
-    </head>
-    <body>
-        <main>
-            <section id="loginSection" >
-                <form id="loginForm" method="post" >
-                    <label for="userName">Enter your User Name</label><br>
-                    <input type="text" id="userName" name="userName" required><br>
-                    <label for="userPass">Enter your password</label><br>
-                    <input type="text" id="userPass" required><br>
-                    <button type="submit" name="loginSubmit">Log In</button>
-                </form>
-            </section>
-            <section id="newTicketSection" >
-                <form id="newTicketForm" method="post" >
-                    <label for="ticketTopic">What is the topic of your ticket?</label><br>
-                    <input type="text" id="ticketTopic" required name="ticketTopic"><br>
-                    <label for="ticketBody">Please describe the issue:</label><br>
-                    <input type="text" id="ticketBody" required name="ticketBody">
-                </form>
-            </section>
-            <section id="previousTicketsSection" ></section>
-            </main>
-        </main>
-    </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Interface</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <!-- System label -->
+  <div class="sys-label">System Interface v1.0</div>
+
+  <!-- ── Login Section ── -->
+  <div id="login-section" class="section">
+    <div class="panel">
+      <div class="panel-title">Authentication Required</div>
+
+      <div class="field">
+        <label for="login-id">User ID</label>
+        <input
+          id="login-id"
+          type="text"
+          autocomplete="username"
+          placeholder="Enter your ID"
+        />
+      </div>
+
+      <div class="field">
+        <label for="login-password">Password</label>
+        <input
+          id="login-password"
+          type="password"
+          autocomplete="current-password"
+          placeholder="Enter your password"
+        />
+      </div>
+
+      <button id="login-btn" class="btn btn-primary" onclick="handleLogin()">
+        Authenticate
+      </button>
+
+      <div id="login-status" class="status-msg hidden"></div>
+    </div>
+  </div>
+
+  <!-- ── Main Section (hidden until login) ── -->
+  <div id="main-section" class="section hidden">
+
+    <!-- Input Form -->
+    <div class="panel">
+      <div class="panel-title">New Submission</div>
+
+      <div class="field">
+        <label for="field-email">Email Address</label>
+        <input
+          id="field-email"
+          type="email"
+          placeholder="user@example.com"
+        />
+      </div>
+
+      <div class="field">
+        <label for="field-text">Short Text</label>
+        <textarea
+          id="field-text"
+          class="short"
+          placeholder="Brief input..."
+        ></textarea>
+      </div>
+
+      <div class="field">
+        <label for="field-longtext">Long Text</label>
+        <textarea
+          id="field-longtext"
+          class="tall"
+          placeholder="Detailed input..."
+        ></textarea>
+      </div>
+
+      <button id="submit-btn" class="btn btn-primary" onclick="handleSubmit()">
+        Submit
+      </button>
+
+      <div id="form-status" class="status-msg hidden"></div>
+    </div>
+
+    <!-- Records Section -->
+    <div>
+      <button id="records-btn" class="btn btn-ghost" onclick="toggleRecords()">
+        View My Previous Submissions
+      </button>
+    </div>
+
+    <div id="records-section" class="section hidden">
+      <div class="records-header">
+        <div class="sys-label">Previous Submissions</div>
+        <div id="record-count" class="record-count"></div>
+      </div>
+      <div id="card-container"></div>
+    </div>
+
+  </div>
+  <!-- end main-section -->
+
+</div><!-- end app -->
+
+<script src="app.js"></script>
+</body>
 </html>
