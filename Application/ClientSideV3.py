@@ -3,7 +3,8 @@
 # AUTHOR: 	JacobT2006
 # CREATED: 	04/9/2026
 # VERSION 1: 	Handles connection to ServerSide and ready for client-side UI
-# VERSION 2:
+# VERSION 2:    Works in client for specifically user
+# VERSION 3:    Works in client for specifically admin
 
 import socket, re, tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox
