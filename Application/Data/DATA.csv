@@ -1,1 +1,6 @@
+ticket_id,name,email,short_description,status,timestamp,long_description
+1001,Jacob,jake@gmail.com,issue with pc,closed,2026-04-30 14:32:24,[05/01 17:46]  | [05/01 17:46] Worked now | [05/01 21:50] I fixed the computer
+1002,Jacob,2020@gmail.com,I have a issue with bitcoin,closed,2026-04-30 16:05:46,[05-01 22:20] (Terry05): We don't do bitcoin
+1003,Jacob,2020@gmail.com,I have a issue with bitcoin,open,2026-04-30 16:05:56,
+1004,Cade,cade@outlook.com,I have a broken screen,open,2026-05-01 22:13,
 
