@@ -184,6 +184,6 @@ Server‑Side Processing
 
 
 ## Work Division:
-+ Member A will work on the client side communication for admin (find, edit, status func's) and ticket submission for users.
++ MysticalSkeptic will work on the client side communication for admin (find, edit, status func's) and ticket submission for users.
 + jzabawski3453 will work on the client side communication for user includes user GUI and login GUI. 
 + JacobT2006 will work on the server side communication between the client UI and the database with login validation.
